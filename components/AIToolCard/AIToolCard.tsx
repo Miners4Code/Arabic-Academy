@@ -1,5 +1,5 @@
 import More from "@/icons/More";
-import { Box, Card, Text, Button, Flex } from "@chakra-ui/react";
+import { Box, Card, Text, Flex, Button } from "@chakra-ui/react";
 import React from "react";
 import { AITool } from "../AIToolsList/AIToolsList";
 import ACAButton from "../ACAButton/ACAButton";
@@ -8,34 +8,44 @@ import Heart from "@/icons/Heart";
 
 interface AIToolCardProps {
   tool: AITool;
+  isFav: boolean | undefined;
+  toggleIsFav: () => void;
 }
 
-const AIToolCard: React.FC<AIToolCardProps> = ({ tool }) => {
+const AIToolCard: React.FC<AIToolCardProps> = ({
+  tool,
+  isFav,
+  toggleIsFav,
+}) => {
   return (
     <Card.Root
-      maxW="sm"
-      overflow="hidden"
       rounded={"none"}
       border={"none"}
       shadow={"lg"}
-      w={"400px"}
+      w={"full"}
       pos={"relative"}
     >
-      <Flex
+      <Button
+        display={"flex"}
         pos={"absolute"}
         top={"15px"}
         left={"15px"}
         w={"50px"}
         h={"50px"}
-        justify={"center"}
-        align={"center"}
+        justifyContent={"center"}
+        alignItems={"center"}
         rounded={"full"}
         shadow={"xl"}
         border={"none"}
+        bg={"white"}
+        _hover={{
+          bg: "gray.50",
+        }}
+        onClick={toggleIsFav}
       >
-        {tool.isFav ? <HeartFill /> : <Heart />}
-      </Flex>
-      <Box
+        {isFav ? <HeartFill /> : <Heart />}
+      </Button>
+      <Flex
         w={{
           base: "280px",
           md: "400px",
@@ -44,7 +54,11 @@ const AIToolCard: React.FC<AIToolCardProps> = ({ tool }) => {
           base: "130px",
           md: "200px",
         }}
-      />
+        justify={"center"}
+        align={"center"}
+      >
+        AI card image
+      </Flex>
       <Card.Body gap="2">
         <Card.Title
           dir="ltr"
@@ -67,6 +81,7 @@ const AIToolCard: React.FC<AIToolCardProps> = ({ tool }) => {
           ))}
         </Box>
         <Card.Description
+          as={Box}
           textAlign={{
             base: "center",
             md: "start",
@@ -76,9 +91,10 @@ const AIToolCard: React.FC<AIToolCardProps> = ({ tool }) => {
             md: "17px",
           }}
           color={"aca_primary.400"}
-          p={"40px"}
+          px={"40px"}
+          py={"20px"}
         >
-          <Text h={"45px"}>{tool.description}</Text>
+          <Text h={"75px"}>{tool.description}</Text>
         </Card.Description>
       </Card.Body>
       <Card.Footer as={Flex} gap="2" justifyContent={"center"} mb={"15px"}>
