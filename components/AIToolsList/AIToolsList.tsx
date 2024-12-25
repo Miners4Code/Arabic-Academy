@@ -19,20 +19,24 @@ export interface AITool {
   description: string;
 }
 
-const AIToolsList = () => {
-  const [tools, setTools] = useState<AITool[]>([]);
+interface AIToolsListProps {
+  tools: AITool[];
+}
+
+const AIToolsList = ({ tools }: AIToolsListProps) => {
+  const [currTools, setCurrTools] = useState<AITool[]>(tools);
   const [error, setError] = useState("");
   const [favList, setFavList] = useState<number[] | null>(null);
   const [showFav, setShowFav] = useState(false);
 
   const handleToggle = (toolId: number) => {
-      if (!favList?.includes(toolId)) {
-        setFavList((prev) => [...(prev as number[]), toolId]);
-      } else {
-        setFavList((prev) =>
-          (prev as number[]).filter((currTool) => currTool !== toolId),
-        );
-      }
+    if (!favList?.includes(toolId)) {
+      setFavList((prev) => [...(prev as number[]), toolId]);
+    } else {
+      setFavList((prev) =>
+        (prev as number[]).filter((currTool) => currTool !== toolId),
+      );
+    }
   };
 
   useEffect(() => {
@@ -40,16 +44,16 @@ const AIToolsList = () => {
     if (storedFavList) setFavList(JSON.parse(storedFavList));
   }, []);
 
-  useEffect(() => {
-    getAITools()
-      .then((response) => {
-        console.log(response.data);
-        setTools(response.data.data);
-      })
-      .catch(() => {
-        setError("خطأ اثناء استرجاع البيانات");
-      });
-  }, []);
+  //useEffect(() => {
+  //  getAITools()
+  //    .then((response) => {
+  //      console.log(response.data);
+  //      setCurrTools(response.data.data);
+  //    })
+  //    .catch(() => {
+  //      setError("خطأ اثناء استرجاع البيانات");
+  //    });
+  //}, []);
 
   useEffect(() => {
     if (favList === null) {
@@ -108,9 +112,9 @@ const AIToolsList = () => {
         mx={"auto"}
         px={"20px"}
       >
-        {tools.length > 0 ? (
+        {currTools.length > 0 ? (
           showFav ? (
-            tools
+            currTools
               .filter((tool) => favList?.includes(tool.tool_id))
               .map((tool) => (
                 <GridItem key={tool.tool_id}>
@@ -122,7 +126,7 @@ const AIToolsList = () => {
                 </GridItem>
               ))
           ) : (
-            tools.map((tool) => (
+            currTools.map((tool) => (
               <GridItem key={tool.tool_id}>
                 <AIToolCard
                   tool={tool}
