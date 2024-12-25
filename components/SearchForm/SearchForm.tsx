@@ -1,7 +1,8 @@
+
 "use client";
 
-import { Box, Button, Fieldset, Flex, Input } from "@chakra-ui/react";
-import React from "react";
+import { Box, Button, Flex, Input,Fieldset } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { Field } from "../ui/field";
 import SearchLens from "@/icons/SearchLens";
 
@@ -12,17 +13,33 @@ interface Props {
     md?: string;
     lg?: string;
   };
+  onSearch: (query: string) => void;
 }
 
-const SearchForm: React.FC<Props> = ({ placeholder, width }) => {
+const SearchForm: React.FC<Props> = ({ placeholder, width, onSearch }) => {
+  const [query, setQuery] = useState<string>("");
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onSearch(query); // Trigger search when form is submitted
+  };
+
   return (
     <Box
       as={"form"}
+      onSubmit={handleSearchSubmit} // Bind form submission to handleSearchSubmit
       width={{
         base: width?.base ?? "300px",
-        md: width?.md ?? "770px",
-        lg: width?.lg ?? "720px",
+        md: width?.md ?? "800px",
+        lg: width?.lg ?? "800px",
       }}
+      position="absolute"
+      left={0}
+      top={18}
     >
       <Fieldset.Root>
         <Fieldset.Content>
@@ -51,8 +68,9 @@ const SearchForm: React.FC<Props> = ({ placeholder, width }) => {
                 roundedLeft={"none"}
                 roundedRight={"full"}
                 paddingX={"10px"}
+                value={query}
+                onChange={handleSearchChange} // Bind input to query state
               />
-
               <Flex
                 height={{
                   base: "50px",
@@ -73,6 +91,7 @@ const SearchForm: React.FC<Props> = ({ placeholder, width }) => {
                   width={"inherit"}
                   height={"inherit"}
                   bgColor={"transparent"}
+                  type="submit" // Trigger search on form submit
                 >
                   <SearchLens />
                 </Button>

@@ -44,16 +44,16 @@ const AIToolsList = ({ tools }: AIToolsListProps) => {
     if (storedFavList) setFavList(JSON.parse(storedFavList));
   }, []);
 
-  //useEffect(() => {
-  //  getAITools()
-  //    .then((response) => {
-  //      console.log(response.data);
-  //      setCurrTools(response.data.data);
-  //    })
-  //    .catch(() => {
-  //      setError("خطأ اثناء استرجاع البيانات");
-  //    });
-  //}, []);
+  useEffect(() => {
+    getAITools()
+      .then((response) => {
+        console.log(response.data);
+        setCurrTools(response.data.data);
+      })
+      .catch(() => {
+        setError("خطأ اثناء استرجاع البيانات");
+      });
+  }, []);
 
   useEffect(() => {
     if (favList === null) {
