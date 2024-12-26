@@ -1,3 +1,5 @@
+"use client";
+
 import Carousel from "@/components/Carousel/Carousel";
 import SearchForm from "@/components/SearchForm/SearchForm";
 import { Box, Flex, Heading } from "@chakra-ui/react";
@@ -70,6 +72,7 @@ const CoursesSlider = ({ children }: Props) => {
           </Heading>
         </Flex>
         <SearchForm
+          onSearch={(q) => console.log(q)}
           placeholder="مقدمة لمحرك األعاب اليونتي"
           width={{
             md: "100%",
