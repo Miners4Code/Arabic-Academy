@@ -3,7 +3,7 @@ import ProductIconMore from "@/icons/ProductIconMore";
 import ProductIconCart from "@/icons/ProductIconCart";
 import ComingSoon from "./ComingSoon";
 import React from "react";
-import { Course } from "@/sections/Products/Products";
+import { Course } from "@/types/courses";
 import PythonIcon from "@/icons/PythonIcon";
 
 interface Props {
