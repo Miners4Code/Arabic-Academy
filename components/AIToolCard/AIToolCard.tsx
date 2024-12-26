@@ -1,7 +1,7 @@
 import More from "@/icons/More";
 import { Box, Card, Text, Flex, Button } from "@chakra-ui/react";
 import React from "react";
-import { AITool } from "../AIToolsList/AIToolsList";
+import { AITool } from "@/types/ai-tools";
 import ACAButton from "../ACAButton/ACAButton";
 import HeartFill from "@/icons/HeartFill";
 import Heart from "@/icons/Heart";
@@ -46,10 +46,7 @@ const AIToolCard: React.FC<AIToolCardProps> = ({
         {isFav ? <HeartFill /> : <Heart />}
       </Button>
       <Flex
-        w={{
-          base: "280px",
-          md: "400px",
-        }}
+        w={"full"}
         h={{
           base: "130px",
           md: "200px",
@@ -76,7 +73,7 @@ const AIToolCard: React.FC<AIToolCardProps> = ({
         <Box dir="ltr" ms={"20px"}>
           {tool.tags.map((tag) => (
             <Text key={tag} display={"inline"} color={"aca_primary.400"}>
-              {tag}
+              {`${tag} `}
             </Text>
           ))}
         </Box>

@@ -70,6 +70,7 @@ const CoursesSlider = ({ children }: Props) => {
           </Heading>
         </Flex>
         <SearchForm
+          onSearch={(q) => console.log(q)}
           placeholder="مقدمة لمحرك األعاب اليونتي"
           width={{
             md: "100%",
