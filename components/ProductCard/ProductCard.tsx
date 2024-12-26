@@ -3,27 +3,15 @@ import ProductIconMore from "@/icons/ProductIconMore";
 import ProductIconCart from "@/icons/ProductIconCart";
 import ComingSoon from "./ComingSoon";
 import React from "react";
+import { Course } from "@/types/courses";
+import PythonIcon from "@/icons/PythonIcon";
 
-type Props = {
-  soon: boolean;
-  icon: React.ReactNode;
-  title: string;
-  trainer: string;
-  courseDetails: {
-    vids: number;
-    hours: number;
-    mins: number;
-  };
-} & ({ soon: false; price: number } | { soon: true; price?: never });
+interface Props {
+  course: Course;
+}
 
-const ProductCard: React.FC<Props> = ({
-  soon,
-  icon,
-  title,
-  trainer,
-  courseDetails,
-  price,
-}) => {
+const ProductCard: React.FC<Props> = ({ course }) => {
+  const leader = course.trainers.find((trainer) => trainer.leader);
   return (
     <Box
       borderRadius={"10px"}
@@ -31,7 +19,7 @@ const ProductCard: React.FC<Props> = ({
       shadow={"aca_shadow.mb"}
       dir="rtl"
     >
-      {soon && <ComingSoon />}
+      {course.status === "coming_soon" && <ComingSoon />}
       <Card.Root overflow={"hidden"}>
         <Card.Header
           display="flex"
@@ -45,7 +33,7 @@ const ProductCard: React.FC<Props> = ({
           }}
           position="relative"
         >
-          {icon}
+          <PythonIcon />
         </Card.Header>
         <Box
           paddingTop={{
@@ -68,43 +56,44 @@ const ProductCard: React.FC<Props> = ({
             }}
             textAlign={{
               md: "start",
-              base: "center"
+              base: "center",
             }}
           >
             <Box
               display={"flex"}
-              justifyContent={{ 
+              gap={"20px"}
+              justifyContent={{
                 md: "space-between",
-                base: "center"
+                base: "center",
               }}
               pos={"relative"}
             >
-              <Text as={"h3"}>{title}</Text>
-              {!soon && (
+              <Text as={"h3"} h={"100px"}>{course.title}</Text>
+              {course.status === "available" && (
                 <Text
                   as={"span"}
                   fontSize={"22px"}
                   fontWeight={700}
-                  pos={"absolute"}
                   left={0}
                 >
-                  ${price}
+                  ${course.original_price}
                 </Text>
               )}
             </Box>
             <Box paddingBottom={"18px"}>
-              <Text>{trainer}</Text>
-              <Text>
-                {courseDetails.vids}فيديو,
-                {courseDetails.hours}ساعة و{courseDetails.mins}دقيقة
-              </Text>
+              <Text>{`${leader?.first_name} ${leader?.last_name}`}</Text>
+              <Text>{course.total_duration}</Text>
             </Box>
           </Card.Body>
-          <Card.Footer display="flex" justifyContent="center" paddingX={{
-            xl: "20px",
-            lg: "10px",
-            base: "20px"
-          }}>
+          <Card.Footer
+            display="flex"
+            justifyContent="center"
+            paddingX={{
+              xl: "20px",
+              lg: "10px",
+              base: "20px",
+            }}
+          >
             <Button
               width={"50%"}
               height={"55px"}
@@ -123,7 +112,7 @@ const ProductCard: React.FC<Props> = ({
               display={"flex"}
             >
               <ProductIconCart />
-              {soon ? "احجز الان" : "شراء"}
+              {course.status === "coming_soon" ? "احجز الان" : "شراء"}
             </Button>
           </Card.Footer>
         </Box>
