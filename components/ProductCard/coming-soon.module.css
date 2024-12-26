@@ -1,0 +1,27 @@
+.comingSoon {
+  position: absolute;
+  top: -9px;
+  left: 0;
+}
+
+.label {
+  position: absolute;
+  color: white;
+}
+
+.soonImg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.2));
+  z-index: 5;
+}
+
+.back {
+  position: absolute;
+  height: 10px;
+  left: 0;
+  top: 0;
+  z-index: 4;
+}
+

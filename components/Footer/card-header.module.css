@@ -1,0 +1,7 @@
+.heading {
+    width: fit-content;
+    min-width: 120px;
+    border-bottom: 1px solid;
+    height: 42px;
+    text-align: center;
+}

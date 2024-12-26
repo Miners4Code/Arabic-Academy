@@ -5,7 +5,7 @@ import NextImage from "next/image";
 import React from "react";
 import examinationImage1 from "@/assets/examinationImage1.png";
 import examinationImage2 from "@/assets/examinationImage2.png";
-import CustomListItem from "@/components/CustomListItem/CustomListItem";
+import CustomListItem from "@/components/DiscountBanner/CustomListItem/CustomListItem";
 import Terminal from "@/icons/Terminal";
 import NoteBook from "@/icons/NoteBook";
 import RatingCert from "@/icons/RatingCert";

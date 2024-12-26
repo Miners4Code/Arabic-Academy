@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PromoText: React.FC<Props> = ({
-  text,
+  text, 
   paragraph,
   children,
   headingType,

@@ -3,7 +3,7 @@
 
 :root {
   --background: #ffffff;
-  --fs-h1: 20px;
+  --fs-h1: 25px;
   --fs-h2: 18px;
   --fs-h3: 16px;
 }
@@ -33,7 +33,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-tajawal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -42,6 +42,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: inherit;
 }
 
 a {

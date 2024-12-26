@@ -8,35 +8,50 @@ import CarouselArrow from "./CarouselArrow";
 interface Props {
   children: React.ReactNode;
   buttonsColor?: "white" | "primary";
-  slidesToShow: {
-    lg: number;
-    md: number;
-    base: number;
+  slidesToShow?: {
+    xl?: number;
+    lg?: number;
+    md?: number;
+    base?: number;
   };
   arrowGaps: {
-    base: `${number}px`;
-    md: `${number}px`;
-    lg: `${number}px`;
+    base: string;
+    md: string;
+    lg: string;
+  };
+  width?: {
+    base?: string;
+    md?: string;
+    lg?: string;
   };
 }
 
 const Carousel: React.FC<Props> = ({
   children,
   buttonsColor = "primary",
-  slidesToShow,
+  slidesToShow = {
+    base: 1,
+    md: 1,
+    lg: 1,
+    xl: 0,
+  },
   arrowGaps,
+  width,
 }) => {
   return (
-    <Box paddingX={{
-      base: "16",
-      md: "28"
-    }}>
+    <Box mx={"auto"} width={width}>
       <Slider
         infinite
         speed={500}
         slidesToScroll={1}
-        slidesToShow={slidesToShow.lg}
+        slidesToShow={slidesToShow.xl || slidesToShow.lg}
         responsive={[
+          {
+            breakpoint: 1500,
+            settings: {
+              slidesToShow: slidesToShow.lg,
+            },
+          },
           {
             breakpoint: 1024,
             settings: {

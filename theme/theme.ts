@@ -44,6 +44,11 @@ const customConfig = defineConfig({
           tb: { value: "19px" },
           dt: { value: "17px" },
         },
+        another: {
+          mb: { value: "18px" },
+          tb: { value: "25px" },
+          dt: { value: "23px" },
+        },
       },
       radii: {
         tiny: { value: "5px" },

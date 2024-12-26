@@ -6,8 +6,8 @@ import React from "react";
 interface Props {
   text: string;
   icon?: React.ReactNode;
-  weight: "400" | "500" | "600" | "700" | "900";
-  bg: "tomato" | "cyan";
+  weight?: "400" | "500" | "600" | "700" | "900";
+  bg?: "tomato" | "cyan";
   size?: "lg" | "md" | "sm";
 
 }
