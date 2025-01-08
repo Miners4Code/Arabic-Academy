@@ -8,8 +8,8 @@ import Heart from "@/icons/Heart";
 
 interface AIToolCardProps {
   tool: AITool;
-  isFav: boolean | undefined;
-  toggleIsFav: () => void;
+  isFav?: boolean | undefined;
+  toggleIsFav?: () => void;
 }
 
 const AIToolCard: React.FC<AIToolCardProps> = ({

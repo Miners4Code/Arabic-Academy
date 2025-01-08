@@ -1,6 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./Navbar.module.css";
+import loginImage from "@/public/login.png";
+import signUp from "@/public/sign.png";
+import ACAButton from "@/components/ACAButton/ACAButton";
+import Image from "next/image";
+import { sign } from "crypto";
 
 const Navbar: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -90,26 +95,32 @@ const Navbar: React.FC = () => {
           </div>
         ) : (
           <>
-            <a href="/signup">
-              <button className={styles.signupButton}>
-                <img
-                  src="sign.png"
-                  alt="Sign Up Icon"
-                  className={styles.signupIcon}
+            <ACAButton
+              text="انشاء حساب"
+              size="md"
+              bg="cyan"
+              icon={
+                <Image
+                  src={signUp}
+                  alt="تسجيل الدخول"
+                  width={24}
+                  height={24}
                 />
-                انشاء حساب
-              </button>
-            </a>
-            <a href="/login">
-              <button className={styles.loginButton} onClick={() => setIsLoggedIn(true)}>
-                <img
-                  src="login.png"
-                  alt="Login Icon"
-                  className={styles.loginIcon}
+              }
+            />
+            <ACAButton
+              text="تسجيل دخول"
+              size="md"
+              bg="tomato"
+              icon={
+                <Image
+                  src={loginImage}
+                  alt="تسجيل الدخول"
+                  width={24}
+                  height={24}
                 />
-                تسجيل دخول
-              </button>
-            </a>
+              }
+            />
           </>
         )}
       </div>
