@@ -10,6 +10,7 @@ import Exams from "@/sections/Examination/Exams";
 import Contact from "@/sections/Contacts/Contact";
 import FeedbackCard from "@/components/FeedbackCard/Feedback-card";
 import Link from "next/link";
+import NavbarWide from "@/sections/Navbar/NavbarWide";
 
 export default async function Home() {
   const coursesResponse = await fetch(
@@ -19,7 +20,7 @@ export default async function Home() {
 
   return (
     <Flex as={"main"} flexDir={"column"} gridRowStart={2}>
-      <Navbar />
+      <NavbarWide />
       <Hero />
       <Resources />
       <ArabicLang />
