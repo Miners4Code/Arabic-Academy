@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^3.0.2",
     "@emotion/react": "^11.13.3",
     "@types/react-slick": "^0.23.13",
+    "date-fns": "^4.1.0",
     "next": "14.2.15",
     "next-themes": "^0.4.3",
     "react": "^18",
@@ -21,6 +22,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@types/date-fns": "^2.5.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
