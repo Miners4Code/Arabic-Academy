@@ -5,7 +5,6 @@ import loginImage from "@/public/login.png";
 import signUp from "@/public/sign.png";
 import ACAButton from "@/components/ACAButton/ACAButton";
 import Image from "next/image";
-import { sign } from "crypto";
 
 const Navbar: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

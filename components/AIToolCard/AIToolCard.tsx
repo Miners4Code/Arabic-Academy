@@ -1,6 +1,8 @@
+"use client";
+
 import More from "@/icons/More";
 import { Box, Card, Text, Flex, Button } from "@chakra-ui/react";
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { AITool } from "@/types/ai-tools";
 import ACAButton from "../ACAButton/ACAButton";
 import HeartFill from "@/icons/HeartFill";
@@ -9,14 +11,21 @@ import Heart from "@/icons/Heart";
 interface AIToolCardProps {
   tool: AITool;
   isFav?: boolean | undefined;
-  toggleIsFav?: () => void;
+  setFavList: Dispatch<SetStateAction<AITool[]>>;
 }
 
-const AIToolCard: React.FC<AIToolCardProps> = ({
-  tool,
-  isFav,
-  toggleIsFav,
-}) => {
+const AIToolCard: React.FC<AIToolCardProps> = ({ tool, isFav, setFavList }) => {
+  const [tempFav, setTempFav] = useState(isFav);
+
+  const toggleFav = () => {
+    setTempFav(!isFav);
+    if (!isFav) {
+      setFavList((prev) => [...prev, tool]);
+    } else {
+      setFavList((prev) => prev.filter((item) => item.tool_id != tool.tool_id));
+    }
+  };
+
   return (
     <Card.Root
       rounded={"none"}
@@ -41,9 +50,9 @@ const AIToolCard: React.FC<AIToolCardProps> = ({
         _hover={{
           bg: "gray.50",
         }}
-        onClick={toggleIsFav}
+        onClick={toggleFav}
       >
-        {isFav ? <HeartFill /> : <Heart />}
+        {tempFav ? <HeartFill /> : <Heart />}
       </Button>
       <Flex
         w={"full"}

@@ -47,7 +47,6 @@ const ServerSearchForm: React.FC<Props> = ({
     <Box
       as={"form"}
       onSubmit={handleSearchSubmit}
-      mt={"50px"}
       width={{
         base: width?.base ?? "300px",
         md: width?.md ?? "770px",
