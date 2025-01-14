@@ -1,126 +1,86 @@
 "use client";
+
+import { Box, Flex } from "@chakra-ui/react";
+import Image from "next/image";
 import React, { useState } from "react";
-import styles from "./Navbar.module.css";
+import ACALogo from "@/assets/arab_academy.png";
+import NavLinks from "./NavLinks";
+import AuthenticationStatus from "./AuthenticationStatus";
 
-const Navbar: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+export default function NavbarWide() {
+  const [authenticated, setIsAuthenticated] = useState(true);
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.navbarLeft}>
-        <img src="Arab academy.png" alt="Logo" className={styles.navbarLogo} />
-      </div>
-
-      <div
-        className={`${styles.navbarCenter} ${
-          isMobileMenuOpen ? styles.showMenu : ""
-        }`}
+    <Flex
+      bg={"aca_primary.400"}
+      px={{
+        xl: "10",
+        base: "2",
+      }}
+      py={"2"}
+    >
+      <Flex
+        w={{
+          base: "6/12",
+          lg: "3/12",
+        }}
+        align={"center"}
       >
-        {!isLoggedIn ? (
-          <div className={styles.dropdown}>
-            <a href="#" className={styles.navbarLink_mobile}>
-              <img
-                src="mobilelogin.png"
-                alt="Login Icon"
-                className={styles.loginIcon_mobile}
-              />
-              <span>تسجيل الدخول</span>
-            </a>
-            <a href="#" className={styles.navbarLink_mobile}>
-              <img
-                src="mobilesign.png"
-                alt="Sign Up Icon"
-                className={styles.loginIcon_mobile}
-              />
-              <span>انشاء حساب</span>
-            </a>
-
-            <a href="#" className={styles.navbarLink}>
-              <img src="drop.png" alt="مصادر Icon" className={styles.icon} />
-              المصادر
-            </a>
-            <div className={styles.dropdownContent}>
-              <a href="/resource1">المدونة</a>
-              <a href="/resource2">المنتدى</a>
-              <a href="/resource3">قاموس الكلمات</a>
-              <a href="/resource1">دروس فيديو قصيرة</a>
-              <a href="/resource1">دليل أدوات الذكاء الاصطناعي</a>
-              <a href="/resource1">بنك الأسئلة التقنية</a>
-              <a href="/resource1">دروس وأنماط الميدجورني</a>
-              <a href="/resource1">لغة ضاد</a>
-            </div>
-          </div>
-        ) : (
-          <div className={styles.dropdown}>
-            <a href="#" className={styles.navbarLink}>
-              <img src="drop.png" alt="مصادر Icon" className={styles.icon} />
-              المصادر
-            </a>
-            <div className={styles.dropdownContent}>
-              <a href="/resource1">المدونة</a>
-              <a href="/resource2">المنتدى</a>
-              <a href="/resource3">قاموس الكلمات</a>
-              <a href="/resource1">دروس فيديو قصيرة</a>
-              <a href="/resource1">دليل أدوات الذكاء الاصطناعي</a>
-              <a href="/resource1">بنك الأسئلة التقنية</a>
-              <a href="/resource1">دروس وأنماط الميدجورني</a>
-              <a href="/resource1">لغة ضاد</a>
-            </div>
-          </div>
-        )}
-
-        <a href="/courses" className={styles.navbarLink}>
-          المسارات التعليمية
-        </a>
-        <a href="/contact" className={styles.navbarLink}>
-          التواصل
-        </a>
-      </div>
-
-      <div className={styles.navbarRight}>
-        {isLoggedIn ? (
-          <div className={styles.iconsContainer}>
-            <img src="user.png" alt="Profile Icon" className={styles.icons1} />
-            <img src="logout.png" alt="Logout Icon" className={styles.icons2} />
-          </div>
-        ) : (
-          <>
-            <a href="/auth/signup">
-              <button className={styles.signupButton}>
-                <img
-                  src="sign.png"
-                  alt="Sign Up Icon"
-                  className={styles.signupIcon}
-                />
-                انشاء حساب
-              </button>
-            </a>
-            <a href="/auth/login">
-              <button className={styles.loginButton} onClick={() => setIsLoggedIn(true)}>
-                <img
-                  src="login.png"
-                  alt="Login Icon"
-                  className={styles.loginIcon}
-                />
-                تسجيل دخول
-              </button>
-            </a>
-          </>
-        )}
-      </div>
-
-      <div className={styles.mobileMenuIcon} onClick={toggleMobileMenu}>
-        <span className={styles.hamburger}></span>
-        <span className={styles.hamburger}></span>
-        <span className={styles.hamburger}></span>
-      </div>
-    </nav>
+        <Flex
+          align="center"
+          w={{
+            base: "150px",
+            md: "auto",
+          }}
+        >
+          <Image src={ACALogo} alt="الاكاديمية العربية للبرمجة" sizes="" />
+        </Flex>
+      </Flex>
+      <Box
+        w="6/12"
+        display={{
+          base: "none",
+          lg: "flex",
+        }}
+        alignItems="center"
+        justifyContent={{
+          lg: "center",
+          base: "end",
+        }}
+      >
+        <NavLinks
+          authenticated={authenticated}
+          toggleAuthenticated={() => setIsAuthenticated((prev) => !prev)}
+        />
+      </Box>
+      <Flex
+        w={{
+          base: "6/12",
+          lg: "3/12",
+        }}
+        justify={"end"}
+        align={"center"}
+        gap={{
+          base: "2",
+          md: "5",
+        }}
+      >
+        <Box
+          display={{
+            base: "block",
+            lg: "none",
+          }}
+        >
+          <NavLinks
+            authenticated={authenticated}
+            toggleAuthenticated={() => setIsAuthenticated((prev) => !prev)}
+          />
+        </Box>
+        <AuthenticationStatus
+          authenticated={authenticated}
+          toggleAuthenticated={() => setIsAuthenticated((prev) => !prev)}
+        />
+      </Flex>
+    </Flex>
   );
-};
-
-export default Navbar;
+}
