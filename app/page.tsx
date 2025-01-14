@@ -8,9 +8,10 @@ import Resources from "@/sections/Resources/Resources";
 import Products from "@/sections/Products/Products";
 import Exams from "@/sections/Examination/Exams";
 import Contact from "@/sections/Contacts/Contact";
-import FeedbackCard from "@/components/FeedbackCard/Feedback-card";
+import FeedbackCarousel from "@/components/Feedback/FeedbackCarousel";
 import Link from "next/link";
-import NavbarWide from "@/sections/Navbar/NavbarWide";
+
+export const revalidate = 14_400; // 4hrs
 
 export default async function Home() {
   const coursesResponse = await fetch(
@@ -18,9 +19,14 @@ export default async function Home() {
   );
   const { courses } = await coursesResponse.json();
 
+  const reviewsResponse = await fetch(
+    "https://sitev2.arabcodeacademy.com/wp-json/aca/v1/reviews",
+  );
+  const { reviews } = await reviewsResponse.json();
+
   return (
     <Flex as={"main"} flexDir={"column"} gridRowStart={2}>
-      <NavbarWide />
+      <Navbar />
       <Hero />
       <Resources />
       <ArabicLang />
@@ -52,7 +58,7 @@ export default async function Home() {
       <Exams />
       <EduTracks />
       <Contact />
-      <FeedbackCard />
+      <FeedbackCarousel reviews={reviews} />
       <Footer />
     </Flex>
   );
