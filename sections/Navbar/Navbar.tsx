@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
           </div>
         ) : (
           <>
-            <a href="/signup">
+            <a href="/auth/signup">
               <button className={styles.signupButton}>
                 <img
                   src="sign.png"
@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
                 انشاء حساب
               </button>
             </a>
-            <a href="/login">
+            <a href="/auth/login">
               <button className={styles.loginButton} onClick={() => setIsLoggedIn(true)}>
                 <img
                   src="login.png"

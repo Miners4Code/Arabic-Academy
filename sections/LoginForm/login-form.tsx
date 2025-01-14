@@ -10,79 +10,123 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/schema";
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { Field } from "@/components/Field/field";
 import ACAButton from "@/components/ACAButton/ACAButton";
 import loginImage from "@/assets/login.png"
 import Image from "next/image";
+import { login } from "@/actions/login";
+import { FormError } from "@/components/setError/form-error";
 
 
 export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [isPending, setIsPending] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<z.infer<typeof LoginSchema>>({
+  const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      name: "",
+      email: "",
       password: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
     try {
-      setError(undefined);
-      // Add your login logic here
-      console.log(values);
-    } catch (error) {
-      setError("حدث خطأ أثناء تسجيل الدخول");
+      setError("");
+      setSuccess("");
+      setIsPending(true);
+
+      const result = await login(values);
+
+      if (result?.error) {
+        setError(result.error);
+      }
+
+      
+    } catch (err) {
+      console.error("Form submission error:", err);
+      setError("An unexpected error occurred during login");
+    } finally {
+      setIsPending(false);
     }
   };
+
   return (
     <Flex 
-    direction={{
-      base: "column-reverse",
-      md: "column-reverse",
-      lg: "row",
-    }}>
-    <CardWrapper headerLable="تسجيل الدخول">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Flex gap="3" direction="column" paddingX="90px">
-          {/* Username or Email Field */}
-          <Field
-            label="اسم المستخدم أو البريد الإلكتروني*"
-            error={errors.name?.message}
-          >
-            <Input fontSize="20px" paddingX="10px" borderColor="#783BA2" width="400px" type="text" {...register("name")} />
-          </Field>
-          {/* Password Field */}
-          <Field label="كلمة المرور*" error={errors.password?.message}>
-            <Input fontSize="20px" paddingX="10px" borderColor="#783BA2" width="400px" type="password" {...register("password")} />
-          </Field>
-          <Link  color="#783BA2" href="">نسيت كلمة المرور؟</Link>
-          <Flex gap="2">
-            <Checkbox variant="solid" colorPalette="purple" shadow="0px 4px 4px 0px #00000040"/>
-            <Text color="#783BA2">البقاء متصلاً</Text>
+      direction={{
+        base: "column-reverse",
+        md: "column-reverse",
+        lg: "row",
+      }}>
+      <CardWrapper headerLable="تسجيل الدخول">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <Flex gap="3" direction="column" paddingX="90px">
+            <Field
+              label="اسم المستخدم أو البريد الإلكتروني*"
+              error={form.formState.errors.email?.message}
+            >
+              <Input 
+                fontSize="20px" 
+                paddingX="10px" 
+                borderColor="#783BA2" 
+                width="400px" 
+                type="text" 
+                disabled={isPending}
+                {...form.register("email")} 
+              />
+            </Field>
+            <Field 
+              label="كلمة المرور*" 
+              error={form.formState.errors.password?.message}
+            >
+              <Input 
+                fontSize="20px" 
+                paddingX="10px" 
+                borderColor="#783BA2" 
+                width="400px" 
+                type="password" 
+                disabled={isPending}
+                {...form.register("password")} 
+              />
+            </Field>
+            <Link color="#783BA2" href="">نسيت كلمة المرور؟</Link>
+            <Flex gap="2">
+              <Checkbox 
+                variant="solid" 
+                colorPalette="purple" 
+                shadow="0px 4px 4px 0px #00000040"
+              />
+              <Text color="#783BA2">البقاء متصلاً</Text>
+            </Flex>
           </Flex>
-        </Flex>
-        {/* Submit Button */}
-        <Flex gap="4" width="100%" justify="center" marginTop="20px">
-          <ACAButton text="تسجيل الدخول" bg="cyan" type="submit" icon={<LogIn />}/>
-          <Link href="/signup">
-          <ACAButton text="إنشاء حساب جديد" bg="tomato" type="button" icon={<SignUp />}/>
-          </Link>
-        </Flex>
-      </form>
-    </CardWrapper>
+          
+          <Flex gap="4" width="100%" justify="center" marginTop="20px">
+            <ACAButton 
+              text="التالي" 
+              bg="cyan" 
+              type="submit"
 
-    <Box>
-       <Image alt="" src={(loginImage).src} width={582} height={100}/>
-    </Box>
-    
-    
+            />
+            <Link href="/auth/signup">
+              <ACAButton 
+                text="إنشاء حساب جديد" 
+                bg="tomato" 
+                type="button" 
+                icon={<SignUp />}
+                
+              />
+            </Link>
+          </Flex>
+          {error && <FormError message={error} />}
+          {success && <div className="text-green-500">{success}</div>}
+        </form>
+      </CardWrapper>
+
+      <Box>
+        <Image alt="" src={(loginImage).src} width={582} height={100}/>
+      </Box>
     </Flex>
   );
 };

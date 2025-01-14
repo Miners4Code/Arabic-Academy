@@ -9,14 +9,14 @@ import { SignupSchema } from "@/schema";
 import { useState, useTransition } from "react";
 import { Field } from "@/components/Field/field";
 import ACAButton from "@/components/ACAButton/ACAButton";
-import { useRouter } from "next/navigation";
 import { Register } from "@/actions/register";
+import { useRouter } from "next/navigation";
 
 export const SignupForm = () => {
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string|undefined>("");
-  const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
 
   const {
     register,
@@ -35,14 +35,18 @@ export const SignupForm = () => {
   const onSubmit = async (values: z.infer<typeof SignupSchema>) => {
     setError("");
     setSuccess("");
-        startTransition(() => {
-            Register(values).then((response) => {
-                setError(response.error);
-                setSuccess(response.success);
-                
-            })
-        })
-      }
+
+    startTransition(() => {
+      Register(values).then((response) => {
+        if (response.error) {
+          setError(response.error);
+        } else if (response.success) {
+          setSuccess(response.success);
+          router.push(`/auth/create?email=${response.email}`); // Pass email via query
+        }
+      });
+    });
+  };
   return (
     <CardWrapper headerLable="قم بإنشاء حسابك على الأكاديمية! ">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -57,6 +61,7 @@ export const SignupForm = () => {
               placeholder="لن نشارك بريدك الإلكتروني أبدًا مع أي شخص"
               _placeholder={{ fontSize: "14px" }}
               {...register("email")}
+              disabled={isPending}
             />
           </Field>
 
@@ -70,6 +75,7 @@ export const SignupForm = () => {
               placeholder="قم بإنشاء كلمة مرور قوية"
               _placeholder={{ fontSize: "14px" }}
               {...register("password")}
+              disabled={isPending}
             />
           </Field>
 
@@ -83,6 +89,7 @@ export const SignupForm = () => {
               placeholder="أعد إدخال كلمة المرور الخاصة بك للتأكد من مطابقتها"
               _placeholder={{ fontSize: "14px" }}
               {...register("confirmPassword")}
+              disabled={isPending}
             />
           </Field>
 
@@ -110,7 +117,7 @@ export const SignupForm = () => {
           <Link
             variant="underline"
             color="#783BA2"
-            href="/login"
+            href="/auth/login"
             borderBottom="1px solid #783BA2"
             paddingBottom="5px"
             _focus={{

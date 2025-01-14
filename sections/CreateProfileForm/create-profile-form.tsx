@@ -11,12 +11,30 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateProfileSchema } from "@/schema";
-import { useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Field } from "@/components/Field/field";
 import ACAButton from "@/components/ACAButton/ACAButton";
+import { Create } from "@/actions/create";
+import { useRouter } from "next/navigation";
+
 
 export const CreateProfileForm = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState<string | undefined>();
   const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    // Get email from search params or another source
+    const queryParams = new URLSearchParams(window.location.search);
+    const emailFromQuery = queryParams.get("email");
+    if (!emailFromQuery) {
+      setError("Email not provided in query");
+    } else {
+      setEmail(emailFromQuery);
+    }
+  }, []);
 
   const {
     register,
@@ -36,22 +54,34 @@ export const CreateProfileForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof CreateProfileSchema>) => {
-    try {
-      setError(undefined);
-      // Add your login logic here
-      console.log(values);
-    } catch (error) {
-      setError("حدث خطأ أثناء تسجيل الدخول");
-    }
+    setError("");
+    setSuccess("");
+    startTransition(() => {
+      if (!email) {
+        setError("Email is missing");
+        return;
+      }
+      Create(values, email).then((response) => {
+        if (response.error) {
+          setError(response.error);
+        } else if (response.success) {
+          setSuccess(response.success);
+          router.push("/auth/login");
+        }
+      });
+    });
   };
 
-  const countriesJson = countries;
   const handleChange = (e: { target: { value: string } }) => {
-    const selectedCountry = countriesJson.find(
+    const selectedCountry = countries.find(
       (country) => country.code === e.target.value
     );
     console.log("Selected country:", selectedCountry);
   };
+
+  if (!email) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <CardWrapper
@@ -69,6 +99,7 @@ export const CreateProfileForm = () => {
                 width="full"
                 type="text"
                 {...register("firstname")}
+                disabled={isPending}
               />
             </Field>
             <Field label="الاسم الثاني" error={errors.secondname?.message}>
@@ -79,11 +110,12 @@ export const CreateProfileForm = () => {
                 width="full"
                 type="text"
                 {...register("secondname")}
+                disabled={isPending}
               />
             </Field>
           </Flex>
 
-          <Field label=" اسم المستخدم" error={errors.username?.message}>
+          <Field label="اسم المستخدم" error={errors.username?.message}>
             <Input
               fontSize="20px"
               paddingX="10px"
@@ -91,12 +123,14 @@ export const CreateProfileForm = () => {
               width="500px"
               type="text"
               {...register("username")}
+              disabled={isPending}
             />
           </Field>
 
-          <Field label=" بلد الإقامة" error={errors.country?.message}>
+          <Field label="بلد الإقامة" error={errors.country?.message}>
             <select
               {...register("country")}
+              disabled={isPending}
               onChange={handleChange}
               defaultValue=""
               style={{
@@ -116,6 +150,7 @@ export const CreateProfileForm = () => {
               ))}
             </select>
           </Field>
+
           <Field label="" error={errors.privacyPolicy?.message}>
             <Flex gap="2" width="500px" justify="center">
               <Checkbox
@@ -138,7 +173,7 @@ export const CreateProfileForm = () => {
           </Field>
         </Flex>
         <Flex gap="4" width="100%" justify="center" marginTop="20px">
-          <Link href="/signup">
+          <Link href="/auth/signup">
             <ACAButton text="رجوع" bg="tomato" icon={<LogIn />} />
           </Link>
           <ACAButton

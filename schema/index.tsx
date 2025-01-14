@@ -1,9 +1,9 @@
 import * as z from "zod";
 
 export const LoginSchema = z.object({
-  name: z
+  email: z
     .string()
-    .min(1, { message: " اسم المستخدم او الايميل لا يمكن ان يكون فارغاً" }),
+    .email({ message: "عنوان البريد غير صالح" }),
   password: z.string().min(1, { message: " يرجى ادخال كلمه المرور" }),
 });
 
@@ -22,6 +22,7 @@ export const SignupSchema = z.object({
       message: "يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل",
     }),
   confirmPassword: z.string().min(1, { message: "يرجى تأكيد كلمة المرور" }),
+  
 });
 
 export const CreateProfileSchema = z.object({
