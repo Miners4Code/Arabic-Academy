@@ -5,9 +5,10 @@ type Props = {
     text: string,
     number: number,
     icon: ReactNode,
-    isActive: boolean
+    isActive?: boolean
+    display?: "block" | "flex"
 }
-const UserSection: React.FC<Props> = ({ text, number, icon, isActive }) => {
+const UserSection: React.FC<Props> = ({ text, number, icon, isActive, display }) => {
     return (
         <Box
             paddingY={{
@@ -23,6 +24,8 @@ const UserSection: React.FC<Props> = ({ text, number, icon, isActive }) => {
             fontWeight={"bold"}
             color={isActive ? "white" : "aca_primary.400"}
             cursor={"pointer"}
+            display={display ? "flex" : "block"}
+            justifyContent={display ? "space-between" : "start"}
         >
             <Flex
                 alignItems={"center"}

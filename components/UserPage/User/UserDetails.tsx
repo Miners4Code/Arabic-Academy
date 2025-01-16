@@ -21,7 +21,7 @@ const UserDetails = () => {
             <Box
                 marginBottom={"10px"}
             >
-                <h3>KamelMaher</h3>
+                <h2>KamelMaher</h2>
                 <UserDetail text="Kamel Maher" icon={<Person />} />
                 <UserDetail text="Palestine" icon={<Location />} />
             </Box>

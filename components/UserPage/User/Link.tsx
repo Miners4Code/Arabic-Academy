@@ -16,9 +16,9 @@ const Link: React.FC<Props> = ({ link, icon }) => {
             }}
             gap={"5px"}
             fontSize={{
-                base: "10px",
-                md: "13px",
-                lg: "15px"
+                base: "12px",
+                md: "15px",
+                lg: "17px"
             }}
         >
             <p style={{ fontWeight: "bold" }}>{link}</p>

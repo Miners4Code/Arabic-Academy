@@ -1,3 +1,4 @@
+import UserCourses from "@/components/UserPage/Courses/UserCourses"
 import User from "@/components/UserPage/User/User"
 import { Box } from "@chakra-ui/react"
 
@@ -15,9 +16,12 @@ const UserPage = () => {
                 base: "20px"
             }}
             display={"flex"}
-            justifyContent={"center"}
+            flexDirection={"column"}
+            alignItems={"center"}
+            gap={"30px"}
         >
-            <User></User>
+            <User />
+            <UserCourses />
         </Box>
     )
 }
