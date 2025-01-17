@@ -10,8 +10,9 @@ import Footer from "@/sections/Footer/Footer";
 // import Contact from "@/sections/Contacts/Contact";
 // import FeedbackCarousel from "@/components/Feedback/FeedbackCarousel";
 // import Link from "next/link";
-import UserPage from "@/sections/UserPage/UserPage";
+// import UserPage from "@/sections/UserPage/UserPage";
 import { Flex } from "@chakra-ui/react";
+import EditUser from "@/sections/UserPage/EditUser";
 
 export const revalidate = 14_400; // 4hrs
 
@@ -61,7 +62,7 @@ export default async function Home() {
       <EduTracks />
       <Contact />
       <FeedbackCarousel reviews={reviews} /> */}
-      <UserPage />
+      <EditUser />
       <Footer />
     </Flex>
   );
