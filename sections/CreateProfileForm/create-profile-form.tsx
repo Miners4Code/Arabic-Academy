@@ -1,7 +1,6 @@
 "use client";
 
 import { CardWrapper } from "@/components/CardWrapper/card-wrapper";
-import LogIn from "@/icons/Login";
 import SignUp from "@/icons/SignUp";
 import { Box, Flex, Input, Link, Text } from "@chakra-ui/react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -256,7 +255,6 @@ export const CreateProfileForm = () => {
           <ACAButton 
             text="رجوع" 
             bg="tomato" 
-            icon={<LogIn />}
             
           />
         </Link>
