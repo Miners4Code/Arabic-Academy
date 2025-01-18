@@ -23,7 +23,6 @@ export const {
         session.user.email = token.email;
         session.user.name = token.name;
       }
-      console.log("Session callback triggered", session, token);
       return session;
     },
     async jwt({ token }) {

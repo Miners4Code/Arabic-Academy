@@ -1,0 +1,14 @@
+import { currentUser } from "@/lib/auth";
+import UserPage from "@/sections/UserPage/UserPage";
+import { Flex } from "@chakra-ui/react";
+
+const ProfilePage = async () =>{
+    const user = await currentUser()
+    return(
+        <Flex align="center" justify="center">
+            <UserPage />
+        </Flex>
+    );
+}
+
+export default ProfilePage;

@@ -14,7 +14,6 @@ import Signin from "@/icons/signin";
 export default function AuthenticationStatus() {
   const width = useWindowWidth();
   const session = useCurrentUser();
-  console.log("teh current user",session);
 
   const handleSignOut = async () => {
     try {
@@ -61,6 +60,7 @@ export default function AuthenticationStatus() {
         )
       ) : (
         <>
+        <Link href="/user">
           <Button
             w="fit-content"
             h="fit-content"
@@ -69,6 +69,7 @@ export default function AuthenticationStatus() {
           >
             <AvatarIcon />
           </Button>
+          </Link>
           <Button
             w="50px"
             h="50px"
