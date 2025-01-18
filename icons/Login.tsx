@@ -1,27 +1,25 @@
 import { Icon } from "@chakra-ui/react";
 import React from "react";
 
-const LogIn = () => {
+const LoginIcon = ({ color = "white" }: { color?: "white" | "primary" }) => {
   return (
-    <Icon fontSize={"28px"}>
+    <Icon fontSize={24}>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="25"
-        height="28"
-        viewBox="0 0 25 28"
+        viewBox="0 0 30 34"
         fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M24 14.0006H12.5M12.5 14.0006L17.4286 18.2863M12.5 14.0006L17.4286 9.71484"
-          stroke="white"
-          strokeWidth="2"
+          d="M27.8571 16.9576H15M15 16.9576L20.5102 21.9576M15 16.9576L20.5102 11.9576"
+          stroke={color === "primary" ? "#462576" : "white"}
+          strokeWidth={2}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M24 5.43025V4.00167C24 2.42372 22.529 1.14453 20.7143 1.14453H4.28571C2.47106 1.14453 1 2.42372 1 4.00167V24.0017C1 25.5797 2.47106 26.8588 4.28571 26.8588H20.7143C22.529 26.8588 24 25.5797 24 24.0017V22.5731"
-          stroke="white"
-          strokeWidth="2"
+          d="M27.8569 6.95752V5.29085C27.8569 3.4499 26.2123 1.95752 24.1834 1.95752H5.81605C3.78725 1.95752 2.14258 3.4499 2.14258 5.29085V28.6242C2.14258 30.4652 3.78725 31.9575 5.81605 31.9575H24.1834C26.2123 31.9575 27.8569 30.4652 27.8569 28.6242V26.9575"
+          stroke={color === "primary" ? "#462576" : "white"}
+          strokeWidth={2}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -30,4 +28,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default LoginIcon;
