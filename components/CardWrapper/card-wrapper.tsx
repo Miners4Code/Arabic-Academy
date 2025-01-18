@@ -14,7 +14,7 @@ interface CardWrapperProps {
   children: React.ReactNode;
   headerLable: string;
   addText?: string;
-  width?: any;
+  width?: { base: string; md: string; lg: string };
   order?: { base: number; md: number; lg: number };
 }
 
