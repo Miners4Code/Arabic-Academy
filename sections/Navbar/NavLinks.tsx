@@ -20,6 +20,7 @@ import HamBurgerMenu from "@/icons/HamBurgerMenu";
 import CreateAccount from "@/icons/CreateAccount";
 import LoginIcon from "@/icons/Login";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const menuResources = [
   { value: "blog", text: "المدونة" },
@@ -34,6 +35,15 @@ const menuResources = [
 export default function NavLinks() {
   const width = useWindowWidth();
   const { data: session } = useSession();
+  const router = useRouter();
+
+  const handleLoginClick = () => {
+    router.push('/auth/login');
+  };
+
+  const handleSignupClick = () => {
+    router.push('/auth/signup');
+  };
 
   if (width < 1024) {
     return (
@@ -66,7 +76,7 @@ export default function NavLinks() {
           shadow="2xl"
           w={"250px"}
         >
-          {!session?.user && (
+          {!session && (
             <>
               <MenuItem
                 value="log-in"
@@ -75,11 +85,10 @@ export default function NavLinks() {
                 pb="10px"
                 display={"flex"}
                 justifyContent={"center"}
+                onClick={handleLoginClick}
               >
-                <Link href="/auth/login" style={{ display: 'flex', alignItems: 'center' }}>
-                  <LoginIcon color="primary" />
-                  <Span textAlign={"center"}>تسجيل الدخول</Span>
-                </Link>
+                <LoginIcon color="primary" />
+                <Span textAlign={"center"}>تسجيل الدخول</Span>
               </MenuItem>
               <MenuItem
                 value="sign-up"
@@ -89,11 +98,10 @@ export default function NavLinks() {
                 display={"flex"}
                 justifyContent={"center"}
                 cursor={"pointer"}
+                onClick={handleSignupClick}
               >
-                <Link href="/auth/login" style={{ display: 'flex', alignItems: 'center' }}>
-                  <CreateAccount color="primary" />
-                  <Span textAlign={"center"}>إنشاء حساب</Span>
-                </Link>
+                <CreateAccount color="primary" />
+                <Span textAlign={"center"}>إنشاء حساب</Span>
               </MenuItem>
             </>
           )}
@@ -131,11 +139,9 @@ export default function NavLinks() {
                     borderColor={"aca_primary.400"}
                     py={"10px"}
                   >
-                    <Link href={`/${resource.value}`}>
-                      <Span display="block" textAlign={"center"} w="full">
-                        {resource.text}
-                      </Span>
-                    </Link>
+                    <Span display="block" textAlign={"center"} w="full">
+                      {resource.text}
+                    </Span>
                   </Box>
                 ))}
               </Collapsible.Content>
@@ -147,30 +153,26 @@ export default function NavLinks() {
             borderColor={"aca_primary.400"}
             pb="10px"
           >
-            <Link href="/educational-tracks">
-              <Span
-                fontWeight={"medium"}
-                color="aca_primary.500"
-                textAlign={"center"}
-                display="block"
-                w="full"
-              >
-                المسارات التعليمية
-              </Span>
-            </Link>
+            <Span
+              fontWeight={"medium"}
+              color="aca_primary.500"
+              textAlign={"center"}
+              display="block"
+              w="full"
+            >
+              المسارات التعليمية
+            </Span>
           </MenuItem>
           <MenuItem value="contact">
-            <Link href="/contact">
-              <Span
-                fontWeight={"medium"}
-                color="aca_primary.500"
-                textAlign={"center"}
-                display="block"
-                w="full"
-              >
-                التواصل
-              </Span>
-            </Link>
+            <Span
+              fontWeight={"medium"}
+              color="aca_primary.500"
+              textAlign={"center"}
+              display="block"
+              w="full"
+            >
+              التواصل
+            </Span>
           </MenuItem>
         </MenuContent>
       </MenuRoot>
@@ -214,23 +216,21 @@ export default function NavLinks() {
                   borderColor={"aca_primary.400"}
                   pb={idx !== menuResources.length - 1 ? "10px" : "0"}
                 >
-                  <Link href={`/${resource.value}`}>
-                    <Span display="block" textAlign={"center"} w="full">
-                      {resource.text}
-                    </Span>
-                  </Link>
+                  <Span display="block" textAlign={"center"} w="full">
+                    {resource.text}
+                  </Span>
                 </MenuItem>
               ))}
             </MenuContent>
           </MenuRoot>
         </li>
         <li>
-          <Link href="/educational-tracks">
+          <Link href={"#"}>
             <Span fontWeight={"medium"}>المسارات التعليمية</Span>
           </Link>
         </li>
         <li>
-          <Link href="/contact">
+          <Link href={"#"}>
             <Span fontWeight={"medium"}>التواصل</Span>
           </Link>
         </li>

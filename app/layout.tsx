@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
-import { SessionProvider } from "next-auth/react";
-import { auth } from "@/auth";
 import { LayoutSessionWrapper } from "@/components/layout-wrapper/layout-wrapper";
+import { SignupProvider } from "./context/auth-context";
 
 const tajawal = Tajawal({
   subsets: ["arabic", "latin"],
@@ -22,12 +21,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body className={`${tajawal.variable}`}>
         <LayoutSessionWrapper>
+        <SignupProvider>
           <Provider>{children}</Provider>
+        </SignupProvider>
         </LayoutSessionWrapper>
       </body>
     </html>

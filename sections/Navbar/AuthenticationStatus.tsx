@@ -2,40 +2,34 @@
 
 import React from "react";
 import { Button, Link, Span } from "@chakra-ui/react";
-import LoginIcon from "@/icons/Login";
+
 import CreateAccount from "@/icons/CreateAccount";
 import Logout from "@/icons/Logout";
 import AvatarIcon from "@/icons/AvatarIcon";
 import { useWindowWidth } from "@/hooks/useWindowWidth";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import LoginIcon from "@/icons/Login";
 
 export default function AuthenticationStatus() {
   const width = useWindowWidth();
   const session = useCurrentUser();
+  console.log("teh current user",session);
 
   const handleSignOut = async () => {
     try {
-      await signOut({
-        redirect: true,
-        callbackUrl: "/",
-      });
+      await signOut();
     } catch (error) {
       console.error("Sign out error:", error);
     }
   };
-
-  // Show loading state
-  if (status === "loading") {
-    return null;
-  }
 
   return (
     <>
       {!session?(
         width > 1024 && (
           <>
-            <Link href="/auth/login">
+            <Link href="/auth/signup">
               <Button
                 w={"150px"}
                 h={"50px"}

@@ -3,7 +3,11 @@ import React from "react";
 
 const SignUp = () => {
   return (
-    <Icon fontSize={"32px"}>
+    <Icon fontSize={{
+      base: "20px",
+      md: "30px",
+      lg: "25px"
+    }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="27"
