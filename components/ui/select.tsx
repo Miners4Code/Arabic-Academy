@@ -110,17 +110,10 @@ export const SelectRoot = React.forwardRef<
       ref={ref}
       positioning={{ sameWidth: true, ...props.positioning }}
     >
-      {props.asChild ? (
-        props.children
-      ) : (
-        <>
-          <ChakraSelect.HiddenSelect />
-          {props.children}
-        </>
-      )}
+      {props.children}
     </ChakraSelect.Root>
   )
-}) as ChakraSelect.RootComponent
+}) as ChakraSelect.RootComponent;
 
 interface SelectItemGroupProps extends ChakraSelect.ItemGroupProps {
   label: React.ReactNode
