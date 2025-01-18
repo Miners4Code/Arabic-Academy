@@ -1,33 +1,35 @@
 import Navbar from "@/sections/Navbar/Navbar";
-import Hero from "@/sections/Hero/Hero";
-import ArabicLang from "@/sections/ArabicLang/ArabicLang";
+// import Hero from "@/sections/Hero/Hero";
+// import ArabicLang from "@/sections/ArabicLang/ArabicLang";
 import Footer from "@/sections/Footer/Footer";
-import { Box, Button, Flex } from "@chakra-ui/react";
-import EduTracks from "@/sections/EduTracks/EduTracks";
-import Resources from "@/sections/Resources/Resources";
-import Products from "@/sections/Products/Products";
-import Exams from "@/sections/Examination/Exams";
-import Contact from "@/sections/Contacts/Contact";
-import FeedbackCarousel from "@/components/Feedback/FeedbackCarousel";
-import Link from "next/link";
+// import { Box, Button, Flex } from "@chakra-ui/react";
+// import EduTracks from "@/sections/EduTracks/EduTracks";
+// import Resources from "@/sections/Resources/Resources";
+// import Products from "@/sections/Products/Products";
+// import Exams from "@/sections/Examination/Exams";
+// import Contact from "@/sections/Contacts/Contact";
+// import FeedbackCarousel from "@/components/Feedback/FeedbackCarousel";
+// import Link from "next/link";
+import UserPage from "@/sections/UserPage/UserPage";
+import { Flex } from "@chakra-ui/react";
 
 export const revalidate = 14_400; // 4hrs
 
 export default async function Home() {
-  const coursesResponse = await fetch(
-    "https://sitev2.arabcodeacademy.com/wp-json/aca/v1/courses",
-  );
-  const { courses } = await coursesResponse.json();
+  // const coursesResponse = await fetch(
+  //   "https://sitev2.arabcodeacademy.com/wp-json/aca/v1/courses",
+  // );
+  // const { courses } = await coursesResponse.json();
 
-  const reviewsResponse = await fetch(
-    "https://sitev2.arabcodeacademy.com/wp-json/aca/v1/reviews",
-  );
-  const { reviews } = await reviewsResponse.json();
+  // const reviewsResponse = await fetch(
+  //   "https://sitev2.arabcodeacademy.com/wp-json/aca/v1/reviews",
+  // );
+  // const { reviews } = await reviewsResponse.json();
 
   return (
     <Flex as={"main"} flexDir={"column"} gridRowStart={2}>
       <Navbar />
-      <Hero />
+      {/* <Hero />
       <Resources />
       <ArabicLang />
       <Box p={"100px"}>
@@ -58,7 +60,8 @@ export default async function Home() {
       <Exams />
       <EduTracks />
       <Contact />
-      <FeedbackCarousel reviews={reviews} />
+      <FeedbackCarousel reviews={reviews} /> */}
+      <UserPage />
       <Footer />
     </Flex>
   );
