@@ -1,53 +1,62 @@
 "use client";
 
 import React from "react";
-import { Button, Span } from "@chakra-ui/react";
-import LoginIcon from "@/icons/Login";
+import { Button, Link, Span } from "@chakra-ui/react";
+
 import CreateAccount from "@/icons/CreateAccount";
 import Logout from "@/icons/Logout";
 import AvatarIcon from "@/icons/AvatarIcon";
 import { useWindowWidth } from "@/hooks/useWindowWidth";
+import { signOut } from "next-auth/react";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import Signin from "@/icons/signin";
 
-export default function AuthenticationStatus({
-  authenticated,
-  toggleAuthenticated,
-}: {
-  authenticated: boolean;
-  toggleAuthenticated: () => void;
-}) {
+export default function AuthenticationStatus() {
   const width = useWindowWidth();
+  const session = useCurrentUser();
+  console.log("teh current user",session);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error("Sign out error:", error);
+    }
+  };
 
   return (
     <>
-      {!authenticated ? (
+      {!session?(
         width > 1024 && (
           <>
-            <Button
-              w={"150px"}
-              h={"50px"}
-              rounded={"lg"}
-              bg="aca_cyan.400"
-              _hover={{
-                bg: "aca_cyan.500",
-              }}
-              onClick={toggleAuthenticated}
-            >
-              <CreateAccount />
-              <Span>إنشاء حساب</Span>
-            </Button>
-            <Button
-              rounded={"lg"}
-              w={"150px"}
-              h={"50px"}
-              bg="aca_tomato.400"
-              _hover={{
-                bg: "aca_tomato.500",
-              }}
-              onClick={toggleAuthenticated}
-            >
-              <LoginIcon />
-              <Span>تسجيل الدخول</Span>
-            </Button>
+            <Link href="/auth/signup">
+              <Button
+                w={"150px"}
+                h={"50px"}
+                rounded={"lg"}
+                bg="aca_cyan.400"
+                _hover={{
+                  bg: "aca_cyan.500",
+                }}
+              >
+                <CreateAccount />
+                <Span>إنشاء حساب</Span>
+              </Button>
+            </Link>
+            <Link href="/auth/login">
+              <Button
+                rounded={"lg"}
+                w={"150px"}
+                h={"50px"}
+                bg="aca_tomato.400"
+                _hover={{
+                  bg: "aca_tomato.500",
+                }}
+              >
+                <Signin />
+                <Span>تسجيل الدخول</Span>
+              </Button>
+            </Link>
           </>
         )
       ) : (
@@ -68,7 +77,7 @@ export default function AuthenticationStatus({
             _hover={{
               bg: "aca_primary.500",
             }}
-            onClick={toggleAuthenticated}
+            onClick={handleSignOut}
           >
             <Logout />
           </Button>

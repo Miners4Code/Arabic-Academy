@@ -18,7 +18,9 @@ import Link from "next/link";
 import { useWindowWidth } from "@/hooks/useWindowWidth";
 import HamBurgerMenu from "@/icons/HamBurgerMenu";
 import CreateAccount from "@/icons/CreateAccount";
-import LoginIcon from "@/icons/Login";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Signin from "@/icons/signin";
 
 const menuResources = [
   { value: "blog", text: "المدونة" },
@@ -30,14 +32,18 @@ const menuResources = [
   { value: "ar-lang", text: "لغة ضاد" },
 ];
 
-export default function NavLinks({
-  authenticated,
-  toggleAuthenticated,
-}: {
-  authenticated: boolean;
-  toggleAuthenticated: () => void;
-}) {
+export default function NavLinks() {
   const width = useWindowWidth();
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const handleLoginClick = () => {
+    router.push('/auth/login');
+  };
+
+  const handleSignupClick = () => {
+    router.push('/auth/signup');
+  };
 
   if (width < 1024) {
     return (
@@ -70,34 +76,34 @@ export default function NavLinks({
           shadow="2xl"
           w={"250px"}
         >
-          {!authenticated && (
-            <MenuItem
-              value="log-in"
-              borderBottomWidth="1px"
-              borderColor="aca_primary.400"
-              pb="10px"
-              display={"flex"}
-              justifyContent={"center"}
-              onClick={toggleAuthenticated}
-            >
-              <LoginIcon color="primary" />
-              <Span textAlign={"center"}>تسجيل الدخول</Span>
-            </MenuItem>
-          )}
-          {!authenticated && (
-            <MenuItem
-              value="log-in"
-              borderBottomWidth="1px"
-              borderColor="aca_primary.400"
-              pb="10px"
-              display={"flex"}
-              justifyContent={"center"}
-              cursor={"pointer"}
-              onClick={toggleAuthenticated}
-            >
-              <CreateAccount color="primary" />
-              <Span textAlign={"center"}>إنشاء حساب</Span>
-            </MenuItem>
+          {!session && (
+            <>
+              <MenuItem
+                value="log-in"
+                borderBottomWidth="1px"
+                borderColor="aca_primary.400"
+                pb="10px"
+                display={"flex"}
+                justifyContent={"center"}
+                onClick={handleLoginClick}
+              >
+                <Signin color="primary"/>
+                <Span textAlign={"center"}>تسجيل الدخول</Span>
+              </MenuItem>
+              <MenuItem
+                value="sign-up"
+                borderBottomWidth="1px"
+                borderColor="aca_primary.400"
+                pb="10px"
+                display={"flex"}
+                justifyContent={"center"}
+                cursor={"pointer"}
+                onClick={handleSignupClick}
+              >
+                <CreateAccount color="primary" />
+                <Span textAlign={"center"}>إنشاء حساب</Span>
+              </MenuItem>
+            </>
           )}
           <MenuTriggerItem w="full">
             <Collapsible.Root w={"full"}>

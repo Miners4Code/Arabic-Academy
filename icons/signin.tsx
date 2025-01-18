@@ -1,7 +1,7 @@
 import { Icon } from "@chakra-ui/react";
 import React from "react";
 
-const LoginIcon = ({ color = "white" }: { color?: "white" | "primary" }) => {
+const Signin = ({ color = "white" }: { color?: "white" | "primary" }) => {
   return (
     <Icon fontSize={24}>
       <svg
@@ -28,4 +28,4 @@ const LoginIcon = ({ color = "white" }: { color?: "white" | "primary" }) => {
   );
 };
 
-export default LoginIcon;
+export default Signin;

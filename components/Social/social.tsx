@@ -14,10 +14,10 @@ export const Social = () => {
         </Text>
         <Box flex="1" borderBottom="1px solid" borderColor="purple.300" />
       </Flex>
-      <Flex gap="5" width="full" justify="center" marginY="30px">
+      <Flex gap="5" width="full" justify="center" marginY="15px">
         <Button size="sm" colorPalette="blue" shadow="0px 4px 4px 0px #00000040">
           <Flex gap="8" align="center">
-            <Text>Facebook</Text>
+            <Text fontSize={{base:"10px",md:"22px", lg:"20px"}}>Facebook</Text>
             <Box
               border="1px solid white"
               height="45px"
@@ -29,7 +29,7 @@ export const Social = () => {
         </Button>
         <Button size="sm" colorPalette="red" shadow="0px 4px 4px 0px #00000040">
           <Flex gap="8" align="center">
-            <Text>Google</Text>
+            <Text fontSize={{base:"10px",md:"22px", lg:"20px"}}>Google</Text>
             <Box
               border="1px solid white"
               height="45px"
