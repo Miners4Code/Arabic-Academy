@@ -18,7 +18,6 @@ import Link from "next/link";
 import { useWindowWidth } from "@/hooks/useWindowWidth";
 import HamBurgerMenu from "@/icons/HamBurgerMenu";
 import CreateAccount from "@/icons/CreateAccount";
-import LoginIcon from "@/icons/Login";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -87,7 +86,7 @@ export default function NavLinks() {
                 justifyContent={"center"}
                 onClick={handleLoginClick}
               >
-                <LoginIcon color="primary" />
+
                 <Span textAlign={"center"}>تسجيل الدخول</Span>
               </MenuItem>
               <MenuItem
