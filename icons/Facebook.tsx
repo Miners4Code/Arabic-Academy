@@ -3,7 +3,11 @@ import React from "react";
 
 const Facebook = () => {
   return (
-    <Icon fontSize={"28px"}>
+    <Icon fontSize={{
+      base: "15px",
+      md: "19px",
+      lg: "17px"
+    }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
