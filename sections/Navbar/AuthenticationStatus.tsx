@@ -9,12 +9,13 @@ import AvatarIcon from "@/icons/AvatarIcon";
 import { useWindowWidth } from "@/hooks/useWindowWidth";
 import { signOut } from "next-auth/react";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import LoginIcon from "@/icons/Login";
+import Door from "@/icons/door"
+
 
 export default function AuthenticationStatus() {
   const width = useWindowWidth();
   const session = useCurrentUser();
-  console.log("teh current user",session);
+  console.log("teh current user", session);
 
   const handleSignOut = async () => {
     try {
@@ -26,7 +27,7 @@ export default function AuthenticationStatus() {
 
   return (
     <>
-      {!session?(
+      {!session ? (
         width > 1024 && (
           <>
             <Link href="/auth/signup">
@@ -53,7 +54,7 @@ export default function AuthenticationStatus() {
                   bg: "aca_tomato.500",
                 }}
               >
-                <LoginIcon />
+                <Door />
                 <Span>تسجيل الدخول</Span>
               </Button>
             </Link>
