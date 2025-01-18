@@ -20,6 +20,7 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { useRouter } from "next/navigation";
 import { FormSuccess } from "@/components/setSuccess/form-Success";
 import ArrowRight from "@/icons/arrow-right";
+import Signin from "@/icons/signin";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -140,10 +141,11 @@ export const LoginForm = () => {
             direction={{ base: "column", lg: "row" }}
           >
             <ACAButton
-              text="التالي"
+              text="تسجيل الدخول"
               bg="cyan"
               type="submit"
-            ><ArrowRight/></ACAButton>
+              icon={<Signin/>}
+            ></ACAButton>
             <Link href="/auth/signup">
               <ACAButton
                 text="إنشاء حساب جديد"

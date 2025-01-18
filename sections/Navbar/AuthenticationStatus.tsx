@@ -9,6 +9,7 @@ import AvatarIcon from "@/icons/AvatarIcon";
 import { useWindowWidth } from "@/hooks/useWindowWidth";
 import { signOut } from "next-auth/react";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import Signin from "@/icons/signin";
 
 export default function AuthenticationStatus() {
   const width = useWindowWidth();
@@ -52,7 +53,7 @@ export default function AuthenticationStatus() {
                   bg: "aca_tomato.500",
                 }}
               >
-                
+                <Signin />
                 <Span>تسجيل الدخول</Span>
               </Button>
             </Link>

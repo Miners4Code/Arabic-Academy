@@ -20,6 +20,7 @@ import HamBurgerMenu from "@/icons/HamBurgerMenu";
 import CreateAccount from "@/icons/CreateAccount";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Signin from "@/icons/signin";
 
 const menuResources = [
   { value: "blog", text: "المدونة" },
@@ -86,7 +87,7 @@ export default function NavLinks() {
                 justifyContent={"center"}
                 onClick={handleLoginClick}
               >
-
+                <Signin color="primary"/>
                 <Span textAlign={"center"}>تسجيل الدخول</Span>
               </MenuItem>
               <MenuItem
