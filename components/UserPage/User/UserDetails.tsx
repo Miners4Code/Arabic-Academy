@@ -1,3 +1,5 @@
+"use client";
+
 import Location from "@/icons/UserPage/Location"
 import Person from "@/icons/UserPage/Person"
 import { Box, Flex } from "@chakra-ui/react"
@@ -7,8 +9,20 @@ import Link from "./Link"
 import LinkedinIcon from "@/icons/UserPage/LinkedinIcon"
 import GitIcon from "@/icons/UserPage/GitIcon"
 import FacebookIcon from "@/icons/UserPage/FacebookIcon"
+import { ExtendUser } from "@/next-auth"
+import { auth } from "@/auth"
+import { useCurrentUser } from "@/hooks/use-current-user"
+
+
+
 
 const UserDetails = () => {
+    
+    const user = useCurrentUser();
+    console.log(user)
+    const fullName = `${user?.user.firstName} ${user?.user.secondName}`;
+    const link = `${user?.user.firstName}${user?.user.secondName}`;
+    
     return (
         <Box
             className="user-details"
@@ -21,9 +35,9 @@ const UserDetails = () => {
             <Box
                 marginBottom={"10px"}
             >
-                <h2>KamelMaher</h2>
-                <UserDetail text="Kamel Maher" icon={<Person />} />
-                <UserDetail text="Palestine" icon={<Location />} />
+                <h2>{user?.user.name}</h2>
+                <UserDetail text={fullName} icon={<Person />} />
+                <UserDetail text={user?.user.country} icon={<Location />} />
             </Box>
             <Box
                 className="user-links"
@@ -39,9 +53,9 @@ const UserDetails = () => {
                     <LinkIcon></LinkIcon>
                     <h4>الروابط :</h4>
                 </Flex>
-                <Link link="https://www.linkedin.com/in/kamelmaher/" icon={<LinkedinIcon />}></Link>
-                <Link link="kamel Maher" icon={<FacebookIcon />}></Link>
-                <Link link="kamel Maher" icon={<GitIcon />}></Link>
+                <Link link={`https://www.linkedin.com/in/${link}/`} icon={<LinkedinIcon />}></Link>
+                <Link link={fullName} icon={<FacebookIcon />}></Link>
+                <Link link={fullName} icon={<GitIcon />}></Link>
             </Box>
         </Box>
     )
