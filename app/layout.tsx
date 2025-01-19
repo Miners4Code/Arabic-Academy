@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
+import { LayoutSessionWrapper } from "@/components/layout-wrapper/layout-wrapper";
+import { SignupProvider } from "./context/auth-context";
 
 const tajawal = Tajawal({
   subsets: ["arabic", "latin"],
@@ -22,7 +24,11 @@ export default async function RootLayout({
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body className={`${tajawal.variable}`}>
-        <Provider>{children}</Provider>
+        <LayoutSessionWrapper>
+        <SignupProvider>
+          <Provider>{children}</Provider>
+        </SignupProvider>
+        </LayoutSessionWrapper>
       </body>
     </html>
   );
