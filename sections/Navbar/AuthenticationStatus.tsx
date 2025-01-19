@@ -14,6 +14,7 @@ import Signin from "@/icons/signin";
 export default function AuthenticationStatus() {
   const width = useWindowWidth();
   const session = useCurrentUser();
+  console.log(session);
 
   const handleSignOut = async () => {
     try {

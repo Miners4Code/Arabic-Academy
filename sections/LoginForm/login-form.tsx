@@ -19,10 +19,11 @@ import { FormError } from "@/components/setError/form-error";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { useRouter } from "next/navigation";
 import { FormSuccess } from "@/components/setSuccess/form-Success";
-import ArrowRight from "@/icons/arrow-right";
 import Signin from "@/icons/signin";
+import { useSession } from "next-auth/react";
 
 export const LoginForm = () => {
+  const user = useSession();
   const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -50,6 +51,7 @@ export const LoginForm = () => {
           setSuccess(" !تم تسجيل الدخول بنجاح");
           router.refresh();
           window.location.href = "/"
+          console.log(user)
         }
       } catch (err) {
         console.error("Form submission error:", err);
