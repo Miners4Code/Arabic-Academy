@@ -7,9 +7,7 @@ import ACALogo from "@/assets/arab_academy.png";
 import NavLinks from "./NavLinks";
 import AuthenticationStatus from "./AuthenticationStatus";
 
-
 export default function NavbarWide() {
-
   return (
     <Flex
       bg={"aca_primary.400"}
@@ -48,7 +46,7 @@ export default function NavbarWide() {
           base: "end",
         }}
       >
-        <NavLinks/>
+        <NavLinks />
       </Box>
       <Flex
         w={{
@@ -68,7 +66,7 @@ export default function NavbarWide() {
             lg: "none",
           }}
         >
-          <NavLinks/>
+          <NavLinks />
         </Box>
         <AuthenticationStatus />
       </Flex>
