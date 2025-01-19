@@ -1,8 +1,8 @@
 import React from "react";
 import { AIToolsFetchResponse } from "@/types/ai-tools";
-import { ServerPagination } from "@/components/ServerAITools/serverPagination";
 import AIToolsList from "@/components/ServerAITools/AIToolsList";
 
+// NOTE: In this page we are handling pagination and searching on the server.
 export default async function AIToolsServerPage({
   searchParams,
 }: {
@@ -21,7 +21,7 @@ export default async function AIToolsServerPage({
 
   return (
     <>
-      <AIToolsList response={response} page={page} />
+      <AIToolsList response={response} page={page as string} />
     </>
   );
 }

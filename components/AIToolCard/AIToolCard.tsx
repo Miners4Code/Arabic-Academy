@@ -7,6 +7,8 @@ import { AITool } from "@/types/ai-tools";
 import ACAButton from "../ACAButton/ACAButton";
 import HeartFill from "@/icons/HeartFill";
 import Heart from "@/icons/Heart";
+import Image from "next/image";
+import aiToolImg from "@/assets/ai-tool-img.png";
 
 interface AIToolCardProps {
   tool: AITool;
@@ -56,14 +58,10 @@ const AIToolCard: React.FC<AIToolCardProps> = ({ tool, isFav, setFavList }) => {
       </Button>
       <Flex
         w={"full"}
-        h={{
-          base: "130px",
-          md: "200px",
-        }}
         justify={"center"}
         align={"center"}
       >
-        AI card image
+        <Image src={aiToolImg} width={500} height={250} alt={tool.title} />
       </Flex>
       <Card.Body gap="2">
         <Card.Title

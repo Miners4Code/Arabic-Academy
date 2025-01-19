@@ -5,6 +5,7 @@
 export const publicRoutes = [
   "/",
   "/ai-tools",
+  "/server-ai-tools",
   "/aca-video-desktop.mp4",
   "/aca-video-mobile.mp4",
 ];
