@@ -9,8 +9,6 @@ import Link from "./Link"
 import LinkedinIcon from "@/icons/UserPage/LinkedinIcon"
 import GitIcon from "@/icons/UserPage/GitIcon"
 import FacebookIcon from "@/icons/UserPage/FacebookIcon"
-import { ExtendUser } from "@/next-auth"
-import { auth } from "@/auth"
 import { useCurrentUser } from "@/hooks/use-current-user"
 
 
