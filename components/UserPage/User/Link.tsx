@@ -21,7 +21,7 @@ const Link: React.FC<Props> = ({ link, icon }) => {
                 lg: "17px"
             }}
         >
-            <p style={{ fontWeight: "bold" }}>{link}</p>
+            <p style={{ fontWeight: "bold", fontSize:"16px" }}>{link}</p>
             {icon}
         </Flex>
     )

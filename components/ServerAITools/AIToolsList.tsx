@@ -35,6 +35,8 @@ export default function AIToolsList({
     setInvalidateFavs(true);
   }, [favList, mounted]);
 
+  console.log(invalidateFavs);
+
   return (
     <>
       <Filters
@@ -104,7 +106,9 @@ export default function AIToolsList({
                 <GridItem key={tool.tool_id}>
                   <AIToolCard
                     tool={tool}
-                    isFav={!!favList.find(item => item.tool_id === tool.tool_id)}
+                    isFav={
+                      !!favList.find((item) => item.tool_id === tool.tool_id)
+                    }
                     setFavList={setFavList}
                   />
                 </GridItem>
