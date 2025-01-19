@@ -28,9 +28,11 @@ export const {
     async jwt({ token }) {
       if (!token.sub) return token;
       const existingUser = await getUserById(token.sub);
+      console.log('existingUser');
+      console.log(existingUser);
       if (!existingUser) return token;
       const existingAccount = await getAccountById(existingUser.id);
-
+      console.log(existingAccount)
       token.firstName = existingUser.firstname;
       token.secondName = existingUser.secondname;
       token.country = existingUser.country;
