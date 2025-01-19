@@ -36,10 +36,19 @@ export default auth ((req) => {
 });
 
 export const config = {
-    matcher: [
-        // Skip Next.js internals and all static files, unless found in search params
-        '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-        // Always run for API routes
-        '/(api|trpc)(.*)',
-      ],
-}
+  matcher: [
+    /*
+     * Match all request paths except:
+     * 1. _next/static (static files)
+     * 2. _next/image (image optimization files)
+     * 3. favicon.ico (favicon file)
+     * 4. public folder files
+     * 5. public assets
+     * But include:
+     * 1. API routes
+     * 2. Authentication routes
+     */
+    '/((?!_next/static|_next/image|favicon.ico|public/|assets/).*)',
+    '/api/:path*',
+  ]
+};
