@@ -113,6 +113,7 @@ export const SelectRoot = React.forwardRef<
       {props.children}
     </ChakraSelect.Root>
   )
+// @ts-expect-errors: external library error
 }) as ChakraSelect.RootComponent;
 
 interface SelectItemGroupProps extends ChakraSelect.ItemGroupProps {

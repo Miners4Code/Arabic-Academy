@@ -10,6 +10,8 @@ interface Props {
   bg?: "tomato" | "cyan";
   size?: "lg" | "md" | "sm";
   type?: "button" | "submit" | "reset";
+  children?: React.ReactNode
+  disabled?: boolean
 }
 
 const ACAButton: React.FC<Props> = ({
@@ -19,9 +21,12 @@ const ACAButton: React.FC<Props> = ({
   weight,
   size,
   type,
+  children,
+  disabled
 }) => {
   return (
     <Button
+      disabled = {disabled}
       fontWeight={weight}
       bg={`aca_${bg}.400`}
       _hover={{
@@ -32,6 +37,7 @@ const ACAButton: React.FC<Props> = ({
     >
       {icon}
       {text}
+      {children}
     </Button>
   );
 };

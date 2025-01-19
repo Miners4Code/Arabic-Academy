@@ -2,13 +2,13 @@
 
 import { Box, Flex } from "@chakra-ui/react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import ACALogo from "@/assets/arab_academy.png";
 import NavLinks from "./NavLinks";
 import AuthenticationStatus from "./AuthenticationStatus";
 
+
 export default function NavbarWide() {
-  const [authenticated, setIsAuthenticated] = useState(true);
 
   return (
     <Flex
@@ -48,10 +48,7 @@ export default function NavbarWide() {
           base: "end",
         }}
       >
-        <NavLinks
-          authenticated={authenticated}
-          toggleAuthenticated={() => setIsAuthenticated((prev) => !prev)}
-        />
+        <NavLinks/>
       </Box>
       <Flex
         w={{
@@ -71,15 +68,9 @@ export default function NavbarWide() {
             lg: "none",
           }}
         >
-          <NavLinks
-            authenticated={authenticated}
-            toggleAuthenticated={() => setIsAuthenticated((prev) => !prev)}
-          />
+          <NavLinks/>
         </Box>
-        <AuthenticationStatus
-          authenticated={authenticated}
-          toggleAuthenticated={() => setIsAuthenticated((prev) => !prev)}
-        />
+        <AuthenticationStatus />
       </Flex>
     </Flex>
   );
