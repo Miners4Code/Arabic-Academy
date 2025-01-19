@@ -1,5 +1,3 @@
-"use client";
-
 import Location from "@/icons/UserPage/Location"
 import Person from "@/icons/UserPage/Person"
 import { Box, Flex } from "@chakra-ui/react"
@@ -10,13 +8,14 @@ import LinkedinIcon from "@/icons/UserPage/LinkedinIcon"
 import GitIcon from "@/icons/UserPage/GitIcon"
 import FacebookIcon from "@/icons/UserPage/FacebookIcon"
 import { useCurrentUser } from "@/hooks/use-current-user"
+import { auth } from "@/auth"
 
 
 
 
-const UserDetails = () => {
+const UserDetails = async() => {
     
-    const user = useCurrentUser();
+    const user = await auth();
     console.log(user)
     const fullName = `${user?.user.firstName} ${user?.user.secondName}`;
     const link = `${user?.user.firstName}${user?.user.secondName}`;
