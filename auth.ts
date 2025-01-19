@@ -12,6 +12,13 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
+    async signIn({ user }) {
+      //Allow sign in without OAuth
+      if (!user.id) throw new Error("User ID is undefined");
+      const existingUser = await getUserById(user.id);
+      
+      return true;
+    },
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
@@ -23,6 +30,8 @@ export const {
         session.user.email = token.email;
         session.user.name = token.name;
       }
+
+      console.log("the session:",session)
       return session;
     },
     async jwt({ token }) {

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, GridItem, Text } from "@chakra-ui/react";
 import { fetchAITools } from "@/api/ai-tools";
-import AIToolCard from "../AIToolCard/AIToolCard";
+import AIToolCard from "../AIToolCard/AIToolCardClient";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { AITool, AIToolsFetchResponse } from "@/types/ai-tools";
 import { AIToolsListContainer } from "./AIToolsListContainer";

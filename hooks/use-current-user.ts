@@ -1,4 +1,3 @@
-// hooks/use-current-user.ts
 import { useSession } from "next-auth/react";
 
 export const useCurrentUser = () => {
